@@ -1,0 +1,275 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   LBS SHOP — Global CSS
+   Design: Premium Dark, Accent Vert Émeraude
+   ============================================ */
+
+@layer base {
+  :root {
+    --brand-green: #00D084;
+    --brand-green-dark: #00A86B;
+    --brand-green-light: #00F09A;
+    --dark: #0A0A0A;
+    --dark-50: #111111;
+    --dark-100: #1A1A1A;
+    --dark-200: #242424;
+    --dark-300: #2E2E2E;
+    --dark-400: #383838;
+    --dark-500: #4A4A4A;
+    --light: #FFFFFF;
+    --light-muted: #A8A8A8;
+    --light-subtle: #6B6B6B;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--dark);
+    color: var(--light);
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background-color: var(--brand-green);
+    color: var(--dark);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--dark-100);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--dark-400);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-green);
+  }
+}
+
+@layer components {
+  /* ————————————————————————————————
+     Boutons
+  ———————————————————————————————— */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full
+    bg-brand-green text-dark font-semibold text-sm tracking-wide
+    hover:bg-brand-green-light active:scale-95 transition-all duration-200
+    disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100;
+    animation: pulseGreen 0s; /* reset */
+  }
+
+  .btn-primary:not(:disabled):hover {
+    box-shadow: 0 0 20px rgba(0, 208, 132, 0.4);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full
+    bg-dark-100 text-white font-semibold text-sm tracking-wide border border-dark-300
+    hover:bg-dark-200 hover:border-dark-400 active:scale-95 transition-all duration-200
+    disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl
+    text-light-muted text-sm font-medium
+    hover:text-white hover:bg-dark-100 active:scale-95 transition-all duration-200;
+  }
+
+  .btn-icon {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-xl
+    bg-dark-100 border border-dark-300 text-light-muted
+    hover:text-white hover:border-dark-400 active:scale-95 transition-all duration-200;
+  }
+
+  /* ————————————————————————————————
+     Cartes
+  ———————————————————————————————— */
+  .card {
+    @apply bg-dark-100 border border-dark-200 rounded-2xl overflow-hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  .card-hover {
+    @apply card transition-all duration-300
+    hover:border-dark-300 hover:-translate-y-1;
+    &:hover {
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+  }
+
+  .glass {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* ————————————————————————————————
+     Inputs
+  ———————————————————————————————— */
+  .input {
+    @apply w-full px-4 py-3 bg-dark-100 border border-dark-300 rounded-xl
+    text-white text-sm placeholder:text-light-subtle
+    focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20
+    transition-all duration-200 disabled:opacity-50;
+  }
+
+  .input-label {
+    @apply block text-sm font-medium text-light-muted mb-1.5;
+  }
+
+  .select {
+    @apply input appearance-none cursor-pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%236B6B6B' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+  }
+
+  /* ————————————————————————————————
+     Badges
+  ———————————————————————————————— */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wide;
+  }
+  .badge-green {
+    @apply badge bg-brand-green/20 text-brand-green;
+  }
+  .badge-red {
+    @apply badge bg-red-500/20 text-red-400;
+  }
+  .badge-yellow {
+    @apply badge bg-yellow-500/20 text-yellow-400;
+  }
+  .badge-gray {
+    @apply badge bg-dark-300 text-light-muted;
+  }
+  .badge-new {
+    @apply badge bg-blue-500/20 text-blue-400;
+  }
+
+  /* ————————————————————————————————
+     Skeleton loader
+  ———————————————————————————————— */
+  .skeleton {
+    @apply bg-dark-200 rounded-lg relative overflow-hidden;
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.03) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* ————————————————————————————————
+     Section containers
+  ———————————————————————————————— */
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply font-display text-3xl sm:text-4xl font-bold text-white tracking-tight uppercase;
+  }
+
+  .section-subtitle {
+    @apply text-light-muted text-base mt-2;
+  }
+
+  /* ————————————————————————————————
+     Dividers
+  ———————————————————————————————— */
+  .divider {
+    @apply border-dark-200;
+  }
+
+  /* ————————————————————————————————
+     Green accent line
+  ———————————————————————————————— */
+  .accent-line {
+    display: inline-block;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brand-green), transparent);
+    border-radius: 2px;
+  }
+
+  /* ————————————————————————————————
+     Noise texture overlay
+  ———————————————————————————————— */
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/noise.png');
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+@layer utilities {
+  .text-gradient-green {
+    background: linear-gradient(135deg, #00F09A 0%, #00D084 50%, #00A86B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-green-glow {
+    border-color: var(--brand-green);
+    box-shadow: 0 0 0 1px var(--brand-green), 0 0 20px rgba(0, 208, 132, 0.2);
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-radial-green {
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0, 208, 132, 0.12) 0%, transparent 70%);
+  }
+
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Animation delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
